@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}NutriMatch - Formulaire{% endblock %}
+
+{% block content %}
+<main class="min-h-screen bg-gradient-to-br from-green-50 via-white to-amber-50 py-12">
+  <div class="max-w-5xl mx-auto px-6">
+    
+    <div class="mb-10 text-center">
+      <span class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
+        Formulaire utilisateur
+      </span>
+      <h1 class="mt-4 text-4xl md:text-5xl font-extrabold text-slate-900">
+        Créez votre profil nutritionnel
+      </h1>
+      <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+        Remplissez vos informations personnelles, vos préférences et vos contraintes alimentaires
+        afin d’obtenir des recommandations de repas adaptées et sécurisées.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-[32px] shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="grid lg:grid-cols-3">
+        
+        <div class="lg:col-span-1 bg-slate-900 text-white p-8">
+          <h2 class="text-2xl font-bold">Pourquoi ce formulaire ?</h2>
+          <p class="mt-4 text-slate-300 leading-7">
+            Ces informations permettent au système de comprendre votre profil et d’éviter
+            les suggestions incompatibles avec vos allergies, vos objectifs ou votre mode de vie.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+              <p class="font-semibold text-green-400">1. Données personnelles</p>
+              <p class="text-sm text-slate-300 mt-2">Âge, poids, taille, sexe et activité physique.</p>
+            </div>
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+              <p class="font-semibold text-green-400">2. Préférences alimentaires</p>
+              <p class="text-sm text-slate-300 mt-2">Ce que vous aimez, n’aimez pas ou souhaitez éviter.</p>
+            </div>
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+              <p class="font-semibold text-green-400">3. Contraintes critiques</p>
+              <p class="text-sm text-slate-300 mt-2">Allergies, régime spécifique, conditions de santé.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 p-8 lg:p-10">
+          <form method="post" action="#" class="space-y-10">
+            {% csrf_token %}
+
+            <section>
+              <h3 class="text-xl font-bold text-slate-900 mb-5">Informations personnelles</h3>
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Nom complet</label>
+                  <input type="text" name="full_name" placeholder="Ex: Marina Benamara"
+                    class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Âge</label>
+                  <input type="number" name="age" placeholder="Ex: 22"
+                    class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Poids (kg)</label>
+                  <input type="number" step="0.1" name="weight" placeholder="Ex: 70"
+                    class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Taille (cm)</label>
+                  <input type="number" step="0.1" name="height" placeholder="Ex: 175"
+                    class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Sexe</label>
+                  <select name="gender"
+                    class="w-full rounded-2xl border border-slate-300 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option value="">Sélectionner</option>
+                    <option value="male">Homme</option>
+                    <option value="female">Femme</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Niveau d’activité</label>
+                  <select name="activity_level"
+                    class="w-full rounded-2xl border border-slate-300 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option value="">Sélectionner</option>
+                    <option value="low">Faible</option>
+                    <option value="moderate">Moyen</option>
+                    <option value="high">Élevé</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <section>
+              <h3 class="text-xl font-bold text-slate-900 mb-5">Objectifs et préférences</h3>
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Objectif nutritionnel</label>
+                  <select name="goal"
+                    class="w-full rounded-2xl border border-slate-300 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option value="">Sélectionner</option>
+                    <option value="maintain">Maintien</option>
+                    <option value="lose_weight">Perte de poids</option>
+                    <option value="gain_weight">Prise de poids</option>
+                    <option value="muscle_gain">Prise de masse</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Type de régime</label>
+                  <select name="diet_type"
+                    class="w-full rounded-2xl border border-slate-300 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option value="">Sélectionner</option>
+                    <option value="standard">Standard</option>
+                    <option value="vegetarian">Végétarien</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="keto">Keto</option>
+                    <option value="low_carb">Low carb</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mt-5">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Préférences alimentaires</label>
+                <textarea name="preferences" rows="4" placeholder="Ex: j’aime le poulet, les légumes grillés, la cuisine méditerranéenne..."
+                  class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+              </div>
+
+              <div class="mt-5">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Aliments non aimés / à éviter</label>
+                <textarea name="dislikes" rows="3" placeholder="Ex: je n’aime pas les champignons, les fruits de mer..."
+                  class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+              </div>
+            </section>
+
+            <section>
+              <h3 class="text-xl font-bold text-slate-900 mb-5">Contraintes alimentaires et sécurité</h3>
+              
+              <div class="mt-5">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Allergies</label>
+                <textarea name="allergies" rows="3" placeholder="Ex: arachides, lait, gluten..."
+                  class="w-full rounded-2xl border border-red-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-400"></textarea>
+              </div>
+
+              <div class="mt-5">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Conditions de santé / remarques</label>
+                <textarea name="health_conditions" rows="3" placeholder="Ex: diabète, hypertension, besoin de limiter le sel..."
+                  class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+              </div>
+
+              <div class="mt-5 flex items-start gap-3 rounded-2xl bg-amber-50 border border-amber-200 p-4">
+                <input type="checkbox" name="confirm_data" class="mt-1 w-5 h-5 rounded border-slate-300 text-green-600 focus:ring-green-500">
+                <p class="text-sm text-slate-700">
+                  Je confirme que les informations fournies sont correctes afin d’obtenir des recommandations cohérentes et sûres.
+                </p>
+              </div>
+            </section>
+
+            <div class="flex flex-col sm:flex-row gap-4 pt-2">
+              <button type="submit"
+                class="px-6 py-3 rounded-2xl bg-primary text-white font-semibold shadow-glow hover:bg-green-700">
+                Envoyer le formulaire
+              </button>
+
+              <a href="{% url 'home' %}"
+                class="px-6 py-3 rounded-2xl border border-slate-300 bg-white font-semibold hover:bg-slate-100 text-center">
+                Retour à l’accueil
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+{% endblock %}
