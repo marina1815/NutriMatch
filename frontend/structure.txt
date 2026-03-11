@@ -1,0 +1,45 @@
+meal_recommender/
+│
+├── manage.py
+├── requirements.txt
+├── .env
+│
+├── config/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+│
+├── apps/
+│   ├── core/              # page d’accueil, à propos, contact
+│   ├── users/             # inscription, connexion, profil utilisateur
+│   ├── nutrition/         # formulaire nutrition, calculs, préférences
+│   ├── recommendations/   # logique des suggestions de repas / API
+│   └── security/          # logs, validations, contrôles sécurité
+│
+├── templates/
+│   ├── base.html
+│   ├── components/
+│   │   ├── navbar.html
+│   │   ├── footer.html
+│   │   └── hero.html
+│   ├── core/
+│   │   └── home.html
+│   ├── users/
+│   ├── nutrition/
+│   └── recommendations/
+│
+├── static/
+│   ├── css/
+│   │   ├── input.css
+│   │   └── output.css
+│   ├── js/
+│   └── images/
+│
+├── media/
+│
+└── theme/
+    ├── tailwind.config.js
+    ├── postcss.config.js
+    └── package.json

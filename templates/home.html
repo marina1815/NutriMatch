@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}NutriMatch - Accueil{% endblock %}
+
+{% block content %}
+<main>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-green-50 via-white to-amber-50"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
+          Application intelligente de nutrition
+        </span>
+        <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          Trouvez des repas adaptés à votre profil, pas l’inverse.
+        </h1>
+        <p class="mt-6 text-lg text-slate-600 leading-8 max-w-2xl">
+          Une plateforme qui analyse vos préférences, votre mode de vie, vos allergies et vos objectifs pour proposer des suggestions de repas personnalisées, utiles et sécurisées.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          
+          <a href="{% url 'form' %}" class="px-6 py-3 rounded-2xl bg-primary text-white font-semibold shadow-glow hover:bg-green-700">
+            Créer mon profil
+            </a>
+          <button class="px-6 py-3 rounded-2xl border border-slate-300 bg-white font-semibold hover:bg-slate-100">
+            Voir une démo
+          </button>
+        </div>
+        <div class="mt-8 grid grid-cols-3 gap-4 max-w-xl">
+          <div class="rounded-2xl bg-white p-4 border border-slate-200 shadow-sm">
+            <p class="text-2xl font-bold text-slate-900">100%</p>
+            <p class="text-sm text-slate-500 mt-1">contraintes respectées</p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 border border-slate-200 shadow-sm">
+            <p class="text-2xl font-bold text-slate-900">API</p>
+            <p class="text-sm text-slate-500 mt-1">recherche intelligente</p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 border border-slate-200 shadow-sm">
+            <p class="text-2xl font-bold text-slate-900">24/7</p>
+            <p class="text-sm text-slate-500 mt-1">accès rapide</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -top-8 -left-8 w-32 h-32 bg-green-200 rounded-full blur-3xl opacity-50"></div>
+        <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-amber-200 rounded-full blur-3xl opacity-50"></div>
+        <div class="relative bg-white rounded-[28px] border border-slate-200 shadow-2xl p-6 lg:p-8">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-sm text-slate-500">Profil utilisateur</p>
+              <h2 class="text-2xl font-bold">Recommandation du jour</h2>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-semibold">Compatible</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="rounded-2xl bg-slate-50 border border-slate-200 p-4">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h3 class="font-bold text-lg">Bol protéiné au poulet grillé</h3>
+                  <p class="text-sm text-slate-500 mt-1">Riche en protéines · Sans arachides · Faible en sucre</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-primary font-bold text-lg">92%</p>
+                  <p class="text-xs text-slate-500">match</p>
+                </div>
+              </div>
+              <div class="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
+                <div class="rounded-xl bg-white p-3 border border-slate-200"><p class="font-bold">520 kcal</p><p class="text-slate-500">Énergie</p></div>
+                <div class="rounded-xl bg-white p-3 border border-slate-200"><p class="font-bold">38 g</p><p class="text-slate-500">Protéines</p></div>
+                <div class="rounded-xl bg-white p-3 border border-slate-200"><p class="font-bold">12 min</p><p class="text-slate-500">Préparation</p></div>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="rounded-2xl bg-green-50 border border-green-100 p-4">
+                <p class="text-sm text-green-700 font-semibold">Filtres actifs</p>
+                <ul class="mt-3 space-y-2 text-sm text-slate-700">
+                  <li>• Sans lactose</li>
+                  <li>• Éviter fruits à coque</li>
+                  <li>• Objectif : maintien</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl bg-amber-50 border border-amber-100 p-4">
+                <p class="text-sm text-amber-700 font-semibold">Préférences</p>
+                <ul class="mt-3 space-y-2 text-sm text-slate-700">
+                  <li>• Cuisine méditerranéenne</li>
+                  <li>• Repas rapides</li>
+                  <li>• Activité moyenne</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="avantages" class="max-w-7xl mx-auto px-6 py-20">
+    <div class="text-center max-w-3xl mx-auto">
+      <p class="text-primary font-semibold">Pourquoi cette application ?</p>
+      <h2 class="mt-3 text-3xl md:text-4xl font-bold">Une expérience moderne, utile et centrée utilisateur</h2>
+      <p class="mt-4 text-slate-600">
+        La page d’accueil doit rassurer, expliquer vite le concept et pousser l’utilisateur à remplir son profil.
+      </p>
+    </div>
+    <div class="mt-12 grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
+        <div class="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">🥗</div>
+        <h3 class="mt-5 text-xl font-bold">Suggestions personnalisées</h3>
+        <p class="mt-3 text-slate-600">Des repas adaptés au profil, aux objectifs et aux goûts de chaque utilisateur.</p>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
+        <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl">🛡️</div>
+        <h3 class="mt-5 text-xl font-bold">Sécurité alimentaire</h3>
+        <p class="mt-3 text-slate-600">Les allergies et ingrédients interdits sont filtrés avant toute recommandation.</p>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
+        <div class="w-12 h-12 rounded-2xl bg-sky-100 flex items-center justify-center text-2xl">⚡</div>
+        <h3 class="mt-5 text-xl font-bold">Interface simple</h3>
+        <p class="mt-3 text-slate-600">Une navigation claire, moderne et rapide pour démarrer sans complexité.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="fonctionnement" class="bg-slate-900 text-white py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-3xl">
+        <p class="text-green-400 font-semibold">Fonctionnement</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-bold">3 étapes pour recevoir des repas adaptés</h2>
+      </div>
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
+          <p class="text-green-400 font-bold text-lg">01</p>
+          <h3 class="mt-4 text-xl font-bold">Créer votre profil</h3>
+          <p class="mt-3 text-slate-300">Renseignez vos données personnelles, votre activité et vos contraintes alimentaires.</p>
+        </div>
+        <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
+          <p class="text-green-400 font-bold text-lg">02</p>
+          <h3 class="mt-4 text-xl font-bold">Analyser les besoins</h3>
+          <p class="mt-3 text-slate-300">Le système calcule les besoins et prépare des filtres intelligents avant l’appel API.</p>
+        </div>
+        <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
+          <p class="text-green-400 font-bold text-lg">03</p>
+          <h3 class="mt-4 text-xl font-bold">Recevoir les résultats</h3>
+          <p class="mt-3 text-slate-300">L’utilisateur obtient une liste de repas cohérents, personnalisés et sécurisés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="securite" class="max-w-7xl mx-auto px-6 py-20">
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="text-primary font-semibold">Sécurité logicielle</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-bold">Une interface qui inspire confiance dès la première page</h2>
+        <p class="mt-5 text-slate-600 leading-8">
+          Pour ton projet, la page d’accueil doit montrer que l’application ne recommande pas des repas au hasard. Elle protège les données utilisateur, respecte les allergies et valide les informations avant traitement.
+        </p>
+      </div>
+      <div class="grid gap-4">
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm"><span class="font-bold">Validation des données</span><p class="text-slate-600 mt-2">Le formulaire contrôle les champs avant envoi.</p></div>
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm"><span class="font-bold">Contraintes critiques</span><p class="text-slate-600 mt-2">Les allergies sont traitées comme priorité absolue.</p></div>
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm"><span class="font-bold">Traçabilité</span><p class="text-slate-600 mt-2">Les échanges sensibles peuvent être journalisés côté backend.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 pb-20">
+    <div class="rounded-[32px] bg-gradient-to-r from-primary to-green-700 p-10 text-white text-center shadow-glow">
+      <h2 class="text-3xl md:text-4xl font-bold">Prêt à lancer le frontend ?</h2>
+      <p class="mt-4 text-green-50 max-w-2xl mx-auto">
+        Cette maquette sert de base moderne pour ton application Django + HTML + Tailwind. La prochaine étape est de transformer cette page en templates réutilisables.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+        <button class="px-6 py-3 rounded-2xl bg-white text-green-700 font-bold">Créer le formulaire</button>
+        <button class="px-6 py-3 rounded-2xl border border-white/40 font-bold">Préparer le dashboard</button>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
