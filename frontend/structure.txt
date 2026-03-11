@@ -43,3 +43,4 @@ meal_recommender/
     ├── tailwind.config.js
     ├── postcss.config.js
     └── package.json
+

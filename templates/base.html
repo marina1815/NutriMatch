@@ -12,60 +12,174 @@
         extend: {
           colors: {
             primary: '#16a34a',
+            primaryDark: '#15803d',
             secondary: '#f59e0b',
             dark: '#0f172a',
-            soft: '#f8fafc'
+            soft: '#f8fafc',
+            muted: '#64748b',
+            successBg: '#dcfce7',
+            warningBg: '#fef3c7',
+            surface: '#ffffff'
           },
           boxShadow: {
-            glow: '0 20px 45px rgba(22,163,74,0.18)'
+            glow: '0 20px 60px rgba(22,163,74,0.20)',
+            softxl: '0 20px 80px rgba(15,23,42,0.10)',
+            card: '0 10px 30px rgba(15,23,42,0.08)'
+          },
+          borderRadius: {
+            xl2: '1rem',
+            xl3: '1.5rem',
+            xl4: '2rem'
+          },
+          animation: {
+            float: 'float 6s ease-in-out infinite',
+            pulseSoft: 'pulseSoft 3.5s ease-in-out infinite',
+            fadeUp: 'fadeUp .9s ease-out both'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '0.55', transform: 'scale(1)' },
+              '50%': { opacity: '0.9', transform: 'scale(1.05)' }
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
           }
         }
       }
     }
   </script>
-</head>
-<body class="bg-slate-50 text-slate-800">
 
-  <header class="sticky top-0 z-50 backdrop-blur bg-white/80 border-b border-slate-200">
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #f8fafc;
+    }
+
+    .glass {
+      background: rgba(255,255,255,.74);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      @apply inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-primary text-white font-bold shadow-glow transition-all hover:bg-green-700 hover:-translate-y-1;
+    }
+
+    .btn-secondary {
+      @apply inline-flex items-center justify-center px-6 py-3 rounded-2xl border border-slate-300 bg-white text-slate-800 font-bold transition-all hover:bg-slate-100 hover:-translate-y-1;
+    }
+
+    .section-title {
+      @apply text-3xl md:text-4xl font-black tracking-tight text-slate-900;
+    }
+
+    .section-text {
+      @apply text-slate-600 text-lg leading-8;
+    }
+
+    .card-ui {
+      @apply bg-white rounded-3xl border border-slate-200 shadow-card;
+    }
+
+    .input-ui {
+      @apply w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:ring-2 focus:ring-green-500 focus:border-green-500;
+    }
+
+    .label-ui {
+      @apply block text-sm font-bold text-slate-700 mb-2;
+    }
+
+    .badge-ui {
+      @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-bold;
+    }
+  </style>
+</head>
+<body class="text-slate-800 selection:bg-green-200 selection:text-slate-900">
+
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div class="absolute top-10 left-[-5rem] w-72 h-72 rounded-full bg-green-200/40 blur-3xl animate-pulseSoft"></div>
+    <div class="absolute top-40 right-[-4rem] w-80 h-80 rounded-full bg-amber-200/50 blur-3xl animate-pulseSoft"></div>
+    <div class="absolute bottom-10 left-1/3 w-80 h-80 rounded-full bg-emerald-100/60 blur-3xl animate-pulseSoft"></div>
+  </div>
+
+  <header class="sticky top-0 z-50 border-b border-white/40 bg-white/70 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-primary text-white flex items-center justify-center font-bold text-lg">N</div>
+      <a href="{% url 'home' %}" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-primary text-white flex items-center justify-center font-black text-lg shadow-glow transition-transform duration-300 group-hover:scale-105">
+          N
+        </div>
         <div>
-          <p class="font-bold text-lg">NutriMatch</p>
+          <p class="font-extrabold text-lg tracking-tight">NutriMatch</p>
           <p class="text-xs text-slate-500">Repas personnalisés et sécurisés</p>
         </div>
-      </div>
+      </a>
 
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-        <a href="#fonctionnement" class="hover:text-primary">Fonctionnement</a>
-        <a href="#avantages" class="hover:text-primary">Avantages</a>
-        <a href="#securite" class="hover:text-primary">Sécurité</a>
-        <a href="#contact" class="hover:text-primary">Contact</a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="{% url 'home' %}#fonctionnement" class="hover:text-primary transition-colors">Fonctionnement</a>
+        <a href="{% url 'home' %}#avantages" class="hover:text-primary transition-colors">Avantages</a>
+        <a href="{% url 'home' %}#securite" class="hover:text-primary transition-colors">Sécurité</a>
+        <a href="{% url 'form' %}" class="hover:text-primary transition-colors">Formulaire</a>
       </nav>
 
       <div class="flex items-center gap-3">
-        <button class="hidden md:inline-flex px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100">
+        <a href="#" class="hidden md:inline-flex px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 transition-all">
           Connexion
-        </button>
-        <button class="px-4 py-2 rounded-xl bg-primary text-white hover:bg-green-700 shadow-glow">
+        </a>
+        <a href="{% url 'form' %}" class="inline-flex px-4 py-2 rounded-xl bg-primary text-white hover:bg-green-700 shadow-glow transition-all hover:-translate-y-0.5">
           Commencer
-        </button>
+        </a>
       </div>
     </div>
   </header>
 
   {% block content %}{% endblock %}
 
-  <footer id="contact" class="border-t border-slate-200 bg-white">
+  <footer class="border-t border-slate-200 bg-white/80 backdrop-blur mt-16">
     <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between gap-4 text-sm text-slate-500">
       <p>© 2026 NutriMatch — Projet académique en sécurité logicielle</p>
       <div class="flex gap-6">
-        <a href="#" class="hover:text-primary">Mentions</a>
-        <a href="#" class="hover:text-primary">Confidentialité</a>
-        <a href="#" class="hover:text-primary">Contact</a>
+        <a href="#" class="hover:text-primary transition-colors">Mentions</a>
+        <a href="#" class="hover:text-primary transition-colors">Confidentialité</a>
+        <a href="#" class="hover:text-primary transition-colors">Contact</a>
       </div>
     </div>
   </footer>
 
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>

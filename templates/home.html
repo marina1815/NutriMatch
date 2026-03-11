@@ -1,183 +1,324 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NutriMatch - Accueil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#16a34a',
+            secondary: '#f59e0b',
+            dark: '#0f172a',
+            soft: '#f8fafc'
+          },
+          boxShadow: {
+            glow: '0 20px 60px rgba(22,163,74,0.20)',
+            softxl: '0 20px 80px rgba(15,23,42,0.10)'
+          },
+          animation: {
+            float: 'float 6s ease-in-out infinite',
+            pulseSoft: 'pulseSoft 3.5s ease-in-out infinite',
+            fadeUp: 'fadeUp .9s ease-out both',
+            gradientShift: 'gradientShift 12s ease infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' }
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '0.55', transform: 'scale(1)' },
+              '50%': { opacity: '0.9', transform: 'scale(1.05)' }
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            gradientShift: {
+              '0%,100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .glass {
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .shine::after {
+      content: '';
+      position: absolute;
+      inset: -120% auto auto -40%;
+      width: 40%;
+      height: 250%;
+      transform: rotate(18deg);
+      background: linear-gradient(to right, transparent, rgba(255,255,255,.45), transparent);
+      transition: transform .9s ease;
+    }
+    .shine:hover::after {
+      transform: translateX(430%) rotate(18deg);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 selection:bg-green-200 selection:text-slate-900">
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div class="absolute top-10 left-[-5rem] w-72 h-72 rounded-full bg-green-200/40 blur-3xl animate-pulseSoft"></div>
+    <div class="absolute top-40 right-[-4rem] w-80 h-80 rounded-full bg-amber-200/50 blur-3xl animate-pulseSoft"></div>
+    <div class="absolute bottom-10 left-1/3 w-80 h-80 rounded-full bg-emerald-100/60 blur-3xl animate-pulseSoft"></div>
+  </div>
 
-{% block title %}NutriMatch - Accueil{% endblock %}
+  <header class="sticky top-0 z-50 border-b border-white/40 bg-white/70 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-primary text-white flex items-center justify-center font-black text-lg shadow-glow transition-transform duration-300 group-hover:scale-105">N</div>
+        <div>
+          <p class="font-extrabold text-lg tracking-tight">NutriMatch</p>
+          <p class="text-xs text-slate-500">Repas personnalisés et sécurisés</p>
+        </div>
+      </a>
 
-{% block content %}
-<main>
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-green-50 via-white to-amber-50"></div>
-    <div class="relative max-w-7xl mx-auto px-6 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
-      <div>
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
-          Application intelligente de nutrition
-        </span>
-        <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
-          Trouvez des repas adaptés à votre profil, pas l’inverse.
-        </h1>
-        <p class="mt-6 text-lg text-slate-600 leading-8 max-w-2xl">
-          Une plateforme qui analyse vos préférences, votre mode de vie, vos allergies et vos objectifs pour proposer des suggestions de repas personnalisées, utiles et sécurisées.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row gap-4">
-          
-          <a href="{% url 'form' %}" class="px-6 py-3 rounded-2xl bg-primary text-white font-semibold shadow-glow hover:bg-green-700">
-            Créer mon profil
-            </a>
-          <button class="px-6 py-3 rounded-2xl border border-slate-300 bg-white font-semibold hover:bg-slate-100">
-            Voir une démo
-          </button>
-        </div>
-        <div class="mt-8 grid grid-cols-3 gap-4 max-w-xl">
-          <div class="rounded-2xl bg-white p-4 border border-slate-200 shadow-sm">
-            <p class="text-2xl font-bold text-slate-900">100%</p>
-            <p class="text-sm text-slate-500 mt-1">contraintes respectées</p>
-          </div>
-          <div class="rounded-2xl bg-white p-4 border border-slate-200 shadow-sm">
-            <p class="text-2xl font-bold text-slate-900">API</p>
-            <p class="text-sm text-slate-500 mt-1">recherche intelligente</p>
-          </div>
-          <div class="rounded-2xl bg-white p-4 border border-slate-200 shadow-sm">
-            <p class="text-2xl font-bold text-slate-900">24/7</p>
-            <p class="text-sm text-slate-500 mt-1">accès rapide</p>
-          </div>
-        </div>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="#fonctionnement" class="hover:text-primary transition-colors">Fonctionnement</a>
+        <a href="#avantages" class="hover:text-primary transition-colors">Avantages</a>
+        <a href="#securite" class="hover:text-primary transition-colors">Sécurité</a>
+        <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button class="hidden md:inline-flex px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 transition-all">Connexion</button>
+        <button class="px-4 py-2 rounded-xl bg-primary text-white hover:bg-green-700 shadow-glow transition-all hover:-translate-y-0.5">Commencer</button>
       </div>
+    </div>
+  </header>
 
-      <div class="relative">
-        <div class="absolute -top-8 -left-8 w-32 h-32 bg-green-200 rounded-full blur-3xl opacity-50"></div>
-        <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-amber-200 rounded-full blur-3xl opacity-50"></div>
-        <div class="relative bg-white rounded-[28px] border border-slate-200 shadow-2xl p-6 lg:p-8">
-          <div class="flex items-center justify-between mb-6">
-            <div>
-              <p class="text-sm text-slate-500">Profil utilisateur</p>
-              <h2 class="text-2xl font-bold">Recommandation du jour</h2>
-            </div>
-            <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-semibold">Compatible</span>
+  <main>
+    <section class="relative overflow-hidden hero-grid">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,.10),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(245,158,11,.12),transparent_28%)]"></div>
+      <div class="relative max-w-7xl mx-auto px-6 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
+        <div class="animate-fadeUp">
+          <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.05] max-w-3xl">
+            Trouvez des repas adaptés à votre profil,
+            <span class="text-primary">pas l’inverse.</span>
+          </h1>
+          <p class="mt-6 text-lg text-slate-600 leading-8 max-w-2xl">
+            Une plateforme qui analyse vos préférences, votre mode de vie, vos allergies et vos objectifs pour proposer des suggestions de repas personnalisées, utiles et sécurisées.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <button class="shine px-6 py-3 rounded-2xl bg-primary text-white font-bold shadow-glow hover:bg-green-700 transition-all hover:-translate-y-1">
+              <a href="{% url 'form' %}" >
+                 Créer mon profil
+              </a> 
+            </button>
+            
+            <button class="px-6 py-3 rounded-2xl border border-slate-300 bg-white font-bold hover:bg-slate-100 transition-all hover:-translate-y-1">
+              Voir une démo
+            </button>
           </div>
+          <div class="mt-8 flex flex-wrap gap-3 text-sm text-slate-600">
+            <span class="px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm">Allergies prises en compte</span>
+            <span class="px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm">Préférences personnalisées</span>
+            <span class="px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm">Suggestions sécurisées</span>
+          </div>
+          <div class="mt-10 grid grid-cols-3 gap-4 max-w-xl">
+            <div class="rounded-2xl bg-white/90 p-4 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+              <p class="text-2xl font-black text-slate-900">100%</p>
+              <p class="text-sm text-slate-500 mt-1">contraintes respectées</p>
+            </div>
+            <div class="rounded-2xl bg-white/90 p-4 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+              <p class="text-2xl font-black text-slate-900">API</p>
+              <p class="text-sm text-slate-500 mt-1">recherche intelligente</p>
+            </div>
+            <div class="rounded-2xl bg-white/90 p-4 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+              <p class="text-2xl font-black text-slate-900">24/7</p>
+              <p class="text-sm text-slate-500 mt-1">accès rapide</p>
+            </div>
+          </div>
+        </div>
 
-          <div class="space-y-4">
-            <div class="rounded-2xl bg-slate-50 border border-slate-200 p-4">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <h3 class="font-bold text-lg">Bol protéiné au poulet grillé</h3>
-                  <p class="text-sm text-slate-500 mt-1">Riche en protéines · Sans arachides · Faible en sucre</p>
+        <div class="relative reveal">
+          <div class="absolute -top-8 -left-8 w-32 h-32 bg-green-200 rounded-full blur-3xl opacity-60 animate-pulseSoft"></div>
+          <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-amber-200 rounded-full blur-3xl opacity-60 animate-pulseSoft"></div>
+          <div class="relative glass rounded-[32px] border border-white/60 shadow-softxl p-6 lg:p-8 animate-float">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <p class="text-sm text-slate-500">Profil utilisateur</p>
+                <h2 class="text-2xl font-black">Recommandation du jour</h2>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-bold ring-1 ring-green-200">Compatible</span>
+            </div>
+
+            <div class="space-y-4">
+              <div class="rounded-2xl bg-slate-50/90 border border-slate-200 p-4 hover:shadow-md transition-all duration-300">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 class="font-bold text-lg">Bol protéiné au poulet grillé</h3>
+                    <p class="text-sm text-slate-500 mt-1">Riche en protéines · Sans arachides · Faible en sucre</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-primary font-black text-lg">92%</p>
+                    <p class="text-xs text-slate-500">match</p>
+                  </div>
                 </div>
-                <div class="text-right">
-                  <p class="text-primary font-bold text-lg">92%</p>
-                  <p class="text-xs text-slate-500">match</p>
+                <div class="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
+                  <div class="rounded-xl bg-white p-3 border border-slate-200 hover:border-green-300 transition-colors"><p class="font-bold">520 kcal</p><p class="text-slate-500">Énergie</p></div>
+                  <div class="rounded-xl bg-white p-3 border border-slate-200 hover:border-green-300 transition-colors"><p class="font-bold">38 g</p><p class="text-slate-500">Protéines</p></div>
+                  <div class="rounded-xl bg-white p-3 border border-slate-200 hover:border-green-300 transition-colors"><p class="font-bold">12 min</p><p class="text-slate-500">Préparation</p></div>
                 </div>
               </div>
-              <div class="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
-                <div class="rounded-xl bg-white p-3 border border-slate-200"><p class="font-bold">520 kcal</p><p class="text-slate-500">Énergie</p></div>
-                <div class="rounded-xl bg-white p-3 border border-slate-200"><p class="font-bold">38 g</p><p class="text-slate-500">Protéines</p></div>
-                <div class="rounded-xl bg-white p-3 border border-slate-200"><p class="font-bold">12 min</p><p class="text-slate-500">Préparation</p></div>
-              </div>
-            </div>
 
-            <div class="grid md:grid-cols-2 gap-4">
-              <div class="rounded-2xl bg-green-50 border border-green-100 p-4">
-                <p class="text-sm text-green-700 font-semibold">Filtres actifs</p>
-                <ul class="mt-3 space-y-2 text-sm text-slate-700">
-                  <li>• Sans lactose</li>
-                  <li>• Éviter fruits à coque</li>
-                  <li>• Objectif : maintien</li>
-                </ul>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="rounded-2xl bg-green-50 border border-green-100 p-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                  <p class="text-sm text-green-700 font-bold">Filtres actifs</p>
+                  <ul class="mt-3 space-y-2 text-sm text-slate-700">
+                    <li>• Sans lactose</li>
+                    <li>• Éviter fruits à coque</li>
+                    <li>• Objectif : maintien</li>
+                  </ul>
+                </div>
+                <div class="rounded-2xl bg-amber-50 border border-amber-100 p-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                  <p class="text-sm text-amber-700 font-bold">Préférences</p>
+                  <ul class="mt-3 space-y-2 text-sm text-slate-700">
+                    <li>• Cuisine méditerranéenne</li>
+                    <li>• Repas rapides</li>
+                    <li>• Activité moyenne</li>
+                  </ul>
+                </div>
               </div>
-              <div class="rounded-2xl bg-amber-50 border border-amber-100 p-4">
-                <p class="text-sm text-amber-700 font-semibold">Préférences</p>
-                <ul class="mt-3 space-y-2 text-sm text-slate-700">
-                  <li>• Cuisine méditerranéenne</li>
-                  <li>• Repas rapides</li>
-                  <li>• Activité moyenne</li>
-                </ul>
+              <div class="pt-2 flex items-center justify-between text-sm text-slate-500">
+                <span>Réponse estimée : &lt; 2 sec</span>
+                <span class="text-primary font-bold">Sécurité active</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="avantages" class="max-w-7xl mx-auto px-6 py-20">
-    <div class="text-center max-w-3xl mx-auto">
-      <p class="text-primary font-semibold">Pourquoi cette application ?</p>
-      <h2 class="mt-3 text-3xl md:text-4xl font-bold">Une expérience moderne, utile et centrée utilisateur</h2>
-      <p class="mt-4 text-slate-600">
-        La page d’accueil doit rassurer, expliquer vite le concept et pousser l’utilisateur à remplir son profil.
-      </p>
-    </div>
-    <div class="mt-12 grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
-        <div class="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">🥗</div>
-        <h3 class="mt-5 text-xl font-bold">Suggestions personnalisées</h3>
-        <p class="mt-3 text-slate-600">Des repas adaptés au profil, aux objectifs et aux goûts de chaque utilisateur.</p>
-      </div>
-      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
-        <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl">🛡️</div>
-        <h3 class="mt-5 text-xl font-bold">Sécurité alimentaire</h3>
-        <p class="mt-3 text-slate-600">Les allergies et ingrédients interdits sont filtrés avant toute recommandation.</p>
-      </div>
-      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
-        <div class="w-12 h-12 rounded-2xl bg-sky-100 flex items-center justify-center text-2xl">⚡</div>
-        <h3 class="mt-5 text-xl font-bold">Interface simple</h3>
-        <p class="mt-3 text-slate-600">Une navigation claire, moderne et rapide pour démarrer sans complexité.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="fonctionnement" class="bg-slate-900 text-white py-20">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="max-w-3xl">
-        <p class="text-green-400 font-semibold">Fonctionnement</p>
-        <h2 class="mt-3 text-3xl md:text-4xl font-bold">3 étapes pour recevoir des repas adaptés</h2>
+    <section id="avantages" class="max-w-7xl mx-auto px-6 py-24">
+      <div class="text-center max-w-3xl mx-auto reveal">
+        <p class="text-primary font-bold">Pourquoi cette application ?</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-black tracking-tight">Une expérience moderne, utile et centrée utilisateur</h2>
+        <p class="mt-4 text-slate-600 text-lg">La page d’accueil doit rassurer, expliquer vite le concept et pousser l’utilisateur à remplir son profil.</p>
       </div>
       <div class="mt-12 grid md:grid-cols-3 gap-6">
-        <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
-          <p class="text-green-400 font-bold text-lg">01</p>
-          <h3 class="mt-4 text-xl font-bold">Créer votre profil</h3>
-          <p class="mt-3 text-slate-300">Renseignez vos données personnelles, votre activité et vos contraintes alimentaires.</p>
+        <div class="reveal bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-softxl hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl shadow-sm">🥗</div>
+          <h3 class="mt-5 text-xl font-black">Suggestions personnalisées</h3>
+          <p class="mt-3 text-slate-600 leading-7">Des repas adaptés au profil, aux objectifs et aux goûts de chaque utilisateur.</p>
         </div>
-        <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
-          <p class="text-green-400 font-bold text-lg">02</p>
-          <h3 class="mt-4 text-xl font-bold">Analyser les besoins</h3>
-          <p class="mt-3 text-slate-300">Le système calcule les besoins et prépare des filtres intelligents avant l’appel API.</p>
+        <div class="reveal bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-softxl hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl shadow-sm">🛡️</div>
+          <h3 class="mt-5 text-xl font-black">Sécurité alimentaire</h3>
+          <p class="mt-3 text-slate-600 leading-7">Les allergies et ingrédients interdits sont filtrés avant toute recommandation.</p>
         </div>
-        <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
-          <p class="text-green-400 font-bold text-lg">03</p>
-          <h3 class="mt-4 text-xl font-bold">Recevoir les résultats</h3>
-          <p class="mt-3 text-slate-300">L’utilisateur obtient une liste de repas cohérents, personnalisés et sécurisés.</p>
+        <div class="reveal bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-softxl hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center text-2xl shadow-sm">⚡</div>
+          <h3 class="mt-5 text-xl font-black">Interface simple</h3>
+          <p class="mt-3 text-slate-600 leading-7">Une navigation claire, moderne et rapide pour démarrer sans complexité.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="securite" class="max-w-7xl mx-auto px-6 py-20">
-    <div class="grid lg:grid-cols-2 gap-10 items-center">
-      <div>
-        <p class="text-primary font-semibold">Sécurité logicielle</p>
-        <h2 class="mt-3 text-3xl md:text-4xl font-bold">Une interface qui inspire confiance dès la première page</h2>
-        <p class="mt-5 text-slate-600 leading-8">
-          Pour ton projet, la page d’accueil doit montrer que l’application ne recommande pas des repas au hasard. Elle protège les données utilisateur, respecte les allergies et valide les informations avant traitement.
-        </p>
+    <section id="fonctionnement" class="relative overflow-hidden bg-slate-950 text-white py-24">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,197,94,.10),transparent_30%)]"></div>
+      <div class="relative max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl reveal">
+          <p class="text-green-400 font-bold">Fonctionnement</p>
+          <h2 class="mt-3 text-3xl md:text-4xl font-black tracking-tight">3 étapes pour recevoir des repas adaptés</h2>
+          <p class="mt-4 text-slate-400 text-lg">Un parcours simple, lisible et rassurant pour l’utilisateur.</p>
+        </div>
+        <div class="mt-12 grid md:grid-cols-3 gap-6">
+          <div class="reveal rounded-3xl bg-white/5 border border-white/10 p-6 hover:bg-white/[0.08] hover:-translate-y-2 transition-all duration-300">
+            <p class="text-green-400 font-black text-lg">01</p>
+            <h3 class="mt-4 text-xl font-black">Créer votre profil</h3>
+            <p class="mt-3 text-slate-300 leading-7">Renseignez vos données personnelles, votre activité et vos contraintes alimentaires.</p>
+          </div>
+          <div class="reveal rounded-3xl bg-white/5 border border-white/10 p-6 hover:bg-white/[0.08] hover:-translate-y-2 transition-all duration-300">
+            <p class="text-green-400 font-black text-lg">02</p>
+            <h3 class="mt-4 text-xl font-black">Analyser les besoins</h3>
+            <p class="mt-3 text-slate-300 leading-7">Le système calcule les besoins et prépare des filtres intelligents avant l’appel API.</p>
+          </div>
+          <div class="reveal rounded-3xl bg-white/5 border border-white/10 p-6 hover:bg-white/[0.08] hover:-translate-y-2 transition-all duration-300">
+            <p class="text-green-400 font-black text-lg">03</p>
+            <h3 class="mt-4 text-xl font-black">Recevoir les résultats</h3>
+            <p class="mt-3 text-slate-300 leading-7">L’utilisateur obtient une liste de repas cohérents, personnalisés et sécurisés.</p>
+          </div>
+        </div>
       </div>
-      <div class="grid gap-4">
-        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm"><span class="font-bold">Validation des données</span><p class="text-slate-600 mt-2">Le formulaire contrôle les champs avant envoi.</p></div>
-        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm"><span class="font-bold">Contraintes critiques</span><p class="text-slate-600 mt-2">Les allergies sont traitées comme priorité absolue.</p></div>
-        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm"><span class="font-bold">Traçabilité</span><p class="text-slate-600 mt-2">Les échanges sensibles peuvent être journalisés côté backend.</p></div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="max-w-5xl mx-auto px-6 pb-20">
-    <div class="rounded-[32px] bg-gradient-to-r from-primary to-green-700 p-10 text-white text-center shadow-glow">
-      <h2 class="text-3xl md:text-4xl font-bold">Prêt à lancer le frontend ?</h2>
-      <p class="mt-4 text-green-50 max-w-2xl mx-auto">
-        Cette maquette sert de base moderne pour ton application Django + HTML + Tailwind. La prochaine étape est de transformer cette page en templates réutilisables.
-      </p>
-      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-        <button class="px-6 py-3 rounded-2xl bg-white text-green-700 font-bold">Créer le formulaire</button>
-        <button class="px-6 py-3 rounded-2xl border border-white/40 font-bold">Préparer le dashboard</button>
+    <section id="securite" class="max-w-7xl mx-auto px-6 py-24">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div class="reveal">
+          <p class="text-primary font-bold">Sécurité logicielle</p>
+          <h2 class="mt-3 text-3xl md:text-4xl font-black tracking-tight">Une interface qui inspire confiance dès la première page</h2>
+          <p class="mt-5 text-slate-600 leading-8 text-lg">Pour ton projet, la page d’accueil doit montrer que l’application ne recommande pas des repas au hasard. Elle protège les données utilisateur, respecte les allergies et valide les informations avant traitement.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <span class="px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-bold">Validation stricte</span>
+            <span class="px-4 py-2 rounded-full bg-amber-100 text-amber-700 text-sm font-bold">Contraintes critiques</span>
+            <span class="px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-bold">Traçabilité</span>
+          </div>
+        </div>
+        <div class="grid gap-4">
+          <div class="reveal bg-white rounded-3xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all"><span class="font-black">Validation des données</span><p class="text-slate-600 mt-2">Le formulaire contrôle les champs avant envoi.</p></div>
+          <div class="reveal bg-white rounded-3xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all"><span class="font-black">Contraintes critiques</span><p class="text-slate-600 mt-2">Les allergies sont traitées comme priorité absolue.</p></div>
+          <div class="reveal bg-white rounded-3xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all"><span class="font-black">Traçabilité</span><p class="text-slate-600 mt-2">Les échanges sensibles peuvent être journalisés côté backend.</p></div>
+        </div>
+      </div>
+    </section>
+
+ 
+  </main>
+
+  <footer id="contact" class="border-t border-slate-200 bg-white/80 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between gap-4 text-sm text-slate-500">
+      <p>© 2026 NutriMatch — Projet académique en sécurité logicielle</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-primary transition-colors">Mentions</a>
+        <a href="#" class="hover:text-primary transition-colors">Confidentialité</a>
+        <a href="#" class="hover:text-primary transition-colors">Contact</a>
       </div>
     </div>
-  </section>
-</main>
-{% endblock %}
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
